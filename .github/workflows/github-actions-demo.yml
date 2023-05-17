@@ -1,0 +1,30 @@
+name: Daily rewards executable
+on:
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '57 18 * * *'
+jobs:
+  Run-On-MacOS:
+    runs-on: macos-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Run Script
+        env:
+          MICROSOFT_EMAIL: ${{ secrets.MICROSOFTEMAIL }}
+          MICROSOFT_PASSWORD: ${{ secrets.MICROSOFTPASSWORD }}
+          TELEGRAM_API: ${{ secrets.TELEGRAMAPI }}
+          TELEGRAM_USERID: ${{ secrets.TELEGRAMUSERID }}
+        run: |
+          docker build -t undetected-chromedriver . && docker run -it --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$telegramUSERID" -p 5900:5900 undetected-chromedriver python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
+          docker run -it --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$telegramUSERID" -p 5900:5900 undetected-chromedriver python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
+          
