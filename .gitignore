@@ -1,0 +1,6 @@
+venv/
+mount/script-workflow/bing-rewards/BingRewards/drivers/
+mount/script-workflow/bing-rewards/BingRewards/logs/
+mount/script-workflow/bing-rewards/BingRewards/__pycache__/
+mount/script-workflow/bing-rewards/BingRewards/src/__pycache__/
+*.ipynb

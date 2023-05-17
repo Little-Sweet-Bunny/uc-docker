@@ -34,11 +34,17 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip
 RUN pip install ipython
 RUN pip install undetected-chromedriver
+RUN pip install python-dateutil selenium setuptools six requests google-api-python-client google-auth-httplib2 google-auth-oauthlib chromedriver_autoinstaller
 
 # add google chrome repo and accept the key + install chrome
-RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-chrome.gpg
-RUN apt-get update && apt-get install google-chrome-stable=112.* -y
+#RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+#RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-chrome.gpg
+#RUN apt-get update && apt-get install google-chrome-stable=112.* -y
+# Check available versions here: https://www.ubuntuupdates.org/package/google_chrome/stable/main/base/google-chrome-stable
+ARG CHROME_VERSION="112.0.5615.49-1"
+RUN wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
+  && apt install -y /tmp/chrome.deb \
+  && rm /tmp/chrome.deb
 
 # Copy the entrypoint.sh to the container into the root directory
 COPY entrypoint.sh /entrypoint.sh
