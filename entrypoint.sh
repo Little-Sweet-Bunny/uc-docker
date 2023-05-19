@@ -19,5 +19,5 @@ echo -e "\n### pwd: $(pwd)"
 echo -e "\n### cmd: $@"
 "$@"
 
-echo -e "\n### cmd finished, holding container open (till x is closed)"
-wait # waits for all background processes to finish (join)
+#echo -e "\n### cmd finished, holding container open (till x is closed)"
+#wait # waits for all background processes to finish (join)
