@@ -28,6 +28,6 @@ jobs:
           TELEGRAM_API: ${{ secrets.TELEGRAMAPI }}
           TELEGRAM_USERID: ${{ secrets.TELEGRAMUSERID }}
         run: |
-          docker run --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$telegramUSERID" -p 5900:5900 dx5594206/uc-docker:latest python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
-          docker run --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$telegramUSERID" -p 5900:5900 dx5594206/uc-docker:latest python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
+          docker run --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$TELEGRAMUSERID" -p 5900:5900 dx5594206/uc-docker:latest python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
+          docker run --rm --volume ./mount:/opt/wd --name undetected-chromedriver -e VNC_PASSWORD=123456 -e MICROSOFT_EMAIL="$MICROSOFT_EMAIL" -e MICROSOFT_PASSWORD="$MICROSOFT_PASSWORD" -e TELEGRAM_API="$TELEGRAM_API" -e TELEGRAM_USERID="$TELEGRAMUSERID" -p 5900:5900 dx5594206/uc-docker:latest python script-workflow/bing-rewards/BingRewards/BingRewards.py -nhl -t -c
           
