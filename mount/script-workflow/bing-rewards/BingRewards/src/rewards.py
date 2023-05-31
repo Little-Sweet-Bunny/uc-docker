@@ -140,6 +140,7 @@ class Rewards:
 
         #'confirm identity' or 'recover account' page
         elif "identity/confirm" in url or "/recover" in url:
+            print(url)
             raise RuntimeError(
                 "Must confirm account identity by signing in manually first. Please login again with your Microsoft account in Google Chrome."
             )
