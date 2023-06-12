@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron: '57 18 * * *'
+    - cron: '57 10 * * *'
 jobs:
   Run-On-MacOS:
     runs-on: macos-latest
