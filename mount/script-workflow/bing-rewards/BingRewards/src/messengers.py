@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 from abc import ABC, abstractmethod
+import os
 
 
 class BaseMessenger(ABC):
@@ -40,9 +41,15 @@ class TelegramMessenger(BaseMessenger):
         self.userid = userid
 
     def send_message(self, message):
-        reply_url = f'https://api.telegram.org/bot{self.api_token}/sendMessage?chat_id={self.userid}&text={message}'
-        resp = requests.get(reply_url)
-        self.handle_resp(resp)
+        if not os.path.isfile("error.png"):
+            reply_url = f'https://api.telegram.org/bot{self.api_token}/sendMessage?chat_id={self.userid}&text={message}'
+            resp = requests.get(reply_url)
+            self.handle_resp(resp)
+        else:
+            reply_url = f'https://api.telegram.org/bot{self.api_token}/sendPhoto?chat_id={self.userid}&caption={message}'
+            d =  {"photo": open('error.png', 'rb')}
+            resp = requests.get(reply_url, files=d)
+            self.handle_resp(resp)
 
 
 class DiscordMessenger(BaseMessenger):

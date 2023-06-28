@@ -118,6 +118,7 @@ class Rewards:
                         EC.element_to_be_clickable((By.ID, 'KmsiCheckboxField'))
                     ).click()
                 except TimeoutException:
+                    self.driver.save_screenshot("error.png")
                     print('\nIssue logging in, please run in -nhl mode to see the problem\n')
                     raise
                 #yes, stay signed in
@@ -140,10 +141,19 @@ class Rewards:
 
         #'confirm identity' or 'recover account' page
         elif "identity/confirm" in url or "/recover" in url:
-            print(url)
-            raise RuntimeError(
-                "Must confirm account identity by signing in manually first. Please login again with your Microsoft account in Google Chrome."
-            )
+            try:
+                message = f"Waiting for user to approve 2FA, please approve in Microsoft Authenticator"
+                self.__sys_out(message, 2)
+                for messenger in self.messengers:
+                    messenger.send_message(message)
+                WebDriverWait(self.driver, 60).until(
+                    EC.url_contains("https://login.live.com/ppsecure")
+                )
+            except TimeoutException:
+                self.driver.save_screenshot("error.png")
+                raise RuntimeError(
+                    "Must confirm account identity by signing in manually first. Please login again with your Microsoft account in Google Chrome."
+                )
 
         # 2FA page: login url doesn't change
         elif url == self.__LOGIN_URL:
@@ -156,13 +166,16 @@ class Rewards:
                     messenger.send_message(message)
                 WebDriverWait(self.driver, 30).until(
                     EC.url_contains("https://login.live.com/ppsecure")
-                    )
+                )
             except NoSuchElementException:
+                self.driver.save_screenshot("error.png")
                 raise RuntimeError(f"Unable to handle {url}")
             except TimeoutException:
+                self.driver.save_screenshot("error.png")
                 raise TimeoutException("You did not select code within Microsoft Authenticator in time.")
 
         else:
+            self.driver.save_screenshot("error.png")
             raise RuntimeError(url+" Made it to an unrecognized page during login process.")
         # login process not complete yet
         return False
@@ -203,7 +216,7 @@ class Rewards:
         Checks that the url is correct
         And all the offer elements are loaded
         """
-        max_try_count = 2
+        max_try_count = 3
         self.driver.get(self.__DASHBOARD_URL)
 
         try:
@@ -225,6 +238,7 @@ class Rewards:
             WebDriverWait(self.driver, self.__WEB_DRIVER_WAIT_SHORT).until(EC.presence_of_element_located((By.XPATH, offer_xpath)))
         except (TimeoutException, NoSuchElementException) as e:
             if try_count == max_try_count:
+                self.driver.save_screenshot("error.png")
                 raise(e)
             self.__open_dashboard(try_count + 1)
 
