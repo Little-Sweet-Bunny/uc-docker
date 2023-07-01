@@ -46,8 +46,10 @@ class TelegramMessenger(BaseMessenger):
             resp = requests.get(reply_url)
             self.handle_resp(resp)
         else:
-            reply_url = f'https://api.telegram.org/bot{self.api_token}/sendPhoto?chat_id={self.userid}&caption={message}'
-            d =  {"photo": open('error.png', 'rb')}
+            if len(message) > 1024:
+                message = message[-1024:]
+            reply_url = f'https://api.telegram.org/bot{self.api_token}/sendDocument?chat_id={self.userid}&caption={message}'
+            d =  {"document": open('error.png', 'rb')}
             resp = requests.get(reply_url, files=d)
             self.handle_resp(resp)
 
