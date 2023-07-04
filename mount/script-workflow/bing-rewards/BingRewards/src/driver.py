@@ -213,8 +213,8 @@ class DriverFactory(ABC):
 
                         "userAgentMetadata": {
                             "brands": [
-                                {"brand": "Chromium", "version": "112"},
-                                {"brand": "Microsoft Edge", "version": "112"},
+                                {"brand": "Chromium", "version": "114"},
+                                {"brand": "Microsoft Edge", "version": "114"},
                                 {"brand": "Not;A=Brand", "version": "537"},
                             ],
                             "mobile": True,
