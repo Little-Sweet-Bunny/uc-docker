@@ -53,8 +53,8 @@ class DriverFactory(ABC):
 
     # Microsoft Edge user agents for additional points
     # agent src: https://www.whatismybrowser.com/guides/the-latest-user-agent/edge
-    __WEB_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.77"
-    __MOBILE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.77"
+    __WEB_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.37"
+    __MOBILE_USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.37"
 
     @property
     @staticmethod
@@ -207,7 +207,7 @@ class DriverFactory(ABC):
                     driver = cls.WebDriverCls(options=options, driver_executable_path=driver_path)
                     if device == cls.MOBILE_DEVICE:
                         cmd_args = {
-                        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.77",
+                        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.37",
 
                         # DO NOT USE THE DATA BELOW. IT'S AN EXAMPLE AND IT DOESN'T MATCH THE USERAGENT ABOVE
 
@@ -223,8 +223,8 @@ class DriverFactory(ABC):
                             "platformVersion": "15.5.0",
                             #"fullVersion": "105.0.5195.79",
                             "fullVersionList": [
-                                {"brand": "Chromium", "version": "112.0.0.0"},
-                                {"brand": "Microsoft Edge", "version": "112.0.1722.77"},
+                                {"brand": "Chromium", "version": "114.0.0.0"},
+                                {"brand": "Microsoft Edge", "version": "114.0.1823.37"},
                                 {"brand": "Not;A=Brand", "version": "537.36"},
                             ],
                             "architecture": "arm64",
